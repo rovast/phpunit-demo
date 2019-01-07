@@ -68,12 +68,14 @@ class ConnectionTest extends TestCase
 
     public function testCreateDataSet()
     {
+        $this->markTestSkipped('just an example, skipped');
         $tableNames = ['guestbook'];
-        $dataSet = $this->getConnection()->createDataSet()->getTab;
+        $dataSet = $this->getConnection()->createDataSet();
     }
 
     public function testCreateQueryTable()
     {
+        $this->markTestSkipped('just an example, skipped');
         $tableNames = ['guestbook'];
         $queryTable = $this->getConnection()->createQueryTable('guestbook', 'SELECT * FROM guestbook');
     }
