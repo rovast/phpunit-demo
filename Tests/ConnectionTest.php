@@ -21,6 +21,7 @@ use PHPUnit\Framework\TestCase;
  * `created` datetime NOT NULL
  * ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
  * Class ConnectionTest.
+ * @requires extension pdo_mysql
  */
 class ConnectionTest extends TestCase
 {
@@ -92,7 +93,7 @@ class ConnectionTest extends TestCase
         $queryTable = $this->getConnection()->createQueryTable(
             'guestbook', 'SELECT * FROM guestbook'
         );
-        $expectedTable = $this->createFlatXmlDataSet('expectedBook.xml')
+        $expectedTable = $this->createFlatXmlDataSet(__DIR__ . '/expectedBook.xml')
             ->getTable('guestbook');
         $this->assertTablesEqual($expectedTable, $queryTable);
     }
