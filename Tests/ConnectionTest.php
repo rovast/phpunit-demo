@@ -1,13 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: rovast
- * Date: 19-1-7
- * Time: 下午3:53
+
+/*
+ * This file is part of the rovast/phpunit-demo.
+ * (c) rovast <rovast@163.com>
+ * This source file is subject to the MIT license that is bundled.
  */
 
 namespace Rovast\PhpunitDemo\Tests;
-
 
 use PHPUnit\DbUnit\DataSet\ArrayDataSet;
 use PHPUnit\DbUnit\TestCaseTrait;
@@ -21,8 +20,7 @@ use PHPUnit\Framework\TestCase;
  * `user` varchar(255) COLLATE utf8mb4_bin NOT NULL,
  * `created` datetime NOT NULL
  * ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
- * Class ConnectionTest
- * @package Rovast\PhpunitDemo\Tests
+ * Class ConnectionTest.
  */
 class ConnectionTest extends TestCase
 {
@@ -38,6 +36,7 @@ class ConnectionTest extends TestCase
             'root',
             '112233'
         );
+
         return $this->createDefaultDBConnection($pdo);
     }
 
@@ -53,13 +52,13 @@ class ConnectionTest extends TestCase
                         'id' => 1,
                         'content' => 'Hello buddy!',
                         'user' => 'joe',
-                        'created' => '2010-04-24 17:15:23'
+                        'created' => '2010-04-24 17:15:23',
                     ],
                     [
                         'id' => 2,
                         'content' => 'I like it!',
                         'user' => 'mike',
-                        'created' => '2010-04-26 12:14:20'
+                        'created' => '2010-04-26 12:14:20',
                     ],
                 ],
             ]
@@ -82,19 +81,19 @@ class ConnectionTest extends TestCase
 
     public function testGetRowCount()
     {
-        $this->assertEquals(2, $this->getConnection()->getRowCount('guestbook'));
+        $this->assertSame(2, $this->getConnection()->getRowCount('guestbook'));
     }
 
     /**
-     * 测试表的内容和给定的数据集相等
+     * 测试表的内容和给定的数据集相等.
      */
     public function testAddEntry()
     {
         $queryTable = $this->getConnection()->createQueryTable(
             'guestbook', 'SELECT * FROM guestbook'
         );
-        $expectedTable = $this->createFlatXmlDataSet("expectedBook.xml")
-            ->getTable("guestbook");
+        $expectedTable = $this->createFlatXmlDataSet('expectedBook.xml')
+            ->getTable('guestbook');
         $this->assertTablesEqual($expectedTable, $queryTable);
     }
 }
