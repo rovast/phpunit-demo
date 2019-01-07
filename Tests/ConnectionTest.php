@@ -21,6 +21,7 @@ use PHPUnit\Framework\TestCase;
  * `created` datetime NOT NULL
  * ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_bin;
  * Class ConnectionTest.
+ *
  * @requires extension pdo_mysql
  */
 class ConnectionTest extends TestCase
@@ -42,6 +43,8 @@ class ConnectionTest extends TestCase
     }
 
     /**
+     * 请注意，phpunit每次会先 TRUNCATE 数据库，然后把下面数组的数据插入进去.
+     *
      * @return ArrayDataSet
      */
     public function getDataSet()
@@ -93,7 +96,7 @@ class ConnectionTest extends TestCase
         $queryTable = $this->getConnection()->createQueryTable(
             'guestbook', 'SELECT * FROM guestbook'
         );
-        $expectedTable = $this->createFlatXmlDataSet(__DIR__ . '/expectedBook.xml')
+        $expectedTable = $this->createFlatXmlDataSet(__DIR__.'/expectedBook.xml')
             ->getTable('guestbook');
         $this->assertTablesEqual($expectedTable, $queryTable);
     }
