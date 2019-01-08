@@ -22,4 +22,12 @@ class SampleTest extends TestCase
             'This test has not been implemented yet.'
         );
     }
+
+    /**
+     * @test
+     */
+    public function something()
+    {
+        $this->assertTrue(true, 'This should already work.');
+    }
 }
