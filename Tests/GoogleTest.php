@@ -1,19 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: rovast
- * Date: 19-1-8
- * Time: 上午10:04
+
+/*
+ * This file is part of the rovast/phpunit-demo.
+ * (c) rovast <rovast@163.com>
+ * This source file is subject to the MIT license that is bundled.
  */
 
 namespace Rovast\PhpunitDemo\Tests;
 
-
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class GoogleTest
- * @package Rovast\PhpunitDemo\Tests
+ * Class GoogleTest.
  */
 class GoogleTest extends TestCase
 {
@@ -23,11 +21,11 @@ class GoogleTest extends TestCase
             'GoogleSearch.wsdl', 'GoogleSearch'
         );
 
-        $directoryCategory = new stdClass;
+        $directoryCategory = new stdClass();
         $directoryCategory->fullViewableName = '';
         $directoryCategory->specialEncoding = '';
 
-        $element = new stdClass;
+        $element = new stdClass();
         $element->summary = '';
         $element->URL = 'https://phpunit.de/';
         $element->snippet = '...';
@@ -38,7 +36,7 @@ class GoogleTest extends TestCase
         $element->directoryCategory = $directoryCategory;
         $element->directoryTitle = '';
 
-        $result = new stdClass;
+        $result = new stdClass();
         $result->documentFiltering = false;
         $result->searchComments = '';
         $result->estimatedTotalResultsCount = 3.9000;
@@ -55,11 +53,11 @@ class GoogleTest extends TestCase
             ->method('doGoogleSearch')
             ->will($this->returnValue($result));
 
-        /**
+        /*
          * $googleSearch->doGoogleSearch() will now return a stubbed result and
          * the web service's doGoogleSearch() method will not be invoked.
          */
-        $this->assertEquals(
+        $this->assertSame(
             $result,
             $googleSearch->doGoogleSearch(
                 '00000000000000000000000000000000',

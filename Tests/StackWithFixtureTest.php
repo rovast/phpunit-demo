@@ -10,7 +10,7 @@ namespace Rovast\PhpunitDemo\Tests;
 
 use PHPUnit\Framework\TestCase;
 
-class StackTestWithFixture extends TestCase
+class StackWithFixtureTest extends TestCase
 {
     protected $stack;
 
