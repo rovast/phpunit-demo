@@ -69,7 +69,7 @@ class SubjectTest extends TestCase
     }
 
     /**
-     * 更加复杂的参数校验
+     * 更加复杂的参数校验.
      */
     public function testErrorReported2()
     {
@@ -82,9 +82,9 @@ class SubjectTest extends TestCase
             ->method('reportError')
             ->with($this->greaterThan(0),
                 $this->stringContains('Something'),
-                $this->callback(function($subject){
+                $this->callback(function ($subject) {
                     return is_callable([$subject, 'getName']) &&
-                        $subject->getName() == 'My subject';
+                        'My subject' == $subject->getName();
                 }));
 
         $subject = new Subject('My subject');
@@ -93,6 +93,28 @@ class SubjectTest extends TestCase
         // doSomethingBad() 方法应当会通过（observer的）reportError()方法
         // 向 observer 报告错误。
         $subject->doSomethingBad();
+    }
+
+    public function testObserversAreUpdated2()
+    {
+        $subject = new Subject('My subject');
+
+        // Create a prophecy for the Observer class.
+        $observer = $this->prophesize(Observer::class);
+
+        // Set up the expectation for the update() method
+        // to be called only once and with the string 'something'
+        // as its parameter.
+        $observer->update('something')->shouldBeCalled();
+
+        // Reveal the prophecy and attach the mock object
+        // to the Subject.
+        $subject->attach($observer->reveal());
+
+        // Call the doSomething() method on the $subject object
+        // which we expect to call the mocked Observer object's
+        // update() method with the string 'something'.
+        $subject->doSomething();
     }
 }
 
