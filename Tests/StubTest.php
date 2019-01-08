@@ -82,7 +82,7 @@ class StubTest extends TestCase
         // Create a map of arguments to return values.
         $map = [
             ['a', 'b', 'c', 'd'],
-            ['e', 'f', 'g', 'h']
+            ['e', 'f', 'g', 'h'],
         ];
 
         // Configure the stub.
@@ -121,9 +121,9 @@ class StubTest extends TestCase
             ->will($this->onConsecutiveCalls(2, 3, 5, 7));
 
         // $stub->doSomething() 每次返回值都不同
-        $this->assertEquals(2, $stub->doSomething());
-        $this->assertEquals(3, $stub->doSomething());
-        $this->assertEquals(5, $stub->doSomething());
+        $this->assertSame(2, $stub->doSomething());
+        $this->assertSame(3, $stub->doSomething());
+        $this->assertSame(5, $stub->doSomething());
     }
 
     public function testThrowExceptionStub()
